@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+.text-outline {
+  -webkit-text-stroke: 1px white;
+}
+.slide-in-left {
+  animation: slideInLeft 3s ease-out;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100vw);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
