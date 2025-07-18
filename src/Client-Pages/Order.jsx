@@ -68,31 +68,39 @@ const Order = () => {
             <p className="text-gray-400">Visit our menu and place your first order!</p>
           </div>
         ) : (
-          orders.map((order) => (
-            <div key={order._id} className="bg-gray-800 rounded-md p-5 mb-6 shadow-md">
-              <div className="flex justify-between items-center mb-3">
-                <div>
-                  <h2 className="text-xl font-semibold">Table: {order.tableNumber}</h2>
-                  <p className="text-sm text-gray-400">{new Date(order.createdAt).toLocaleString()}</p>
-                </div>
-                <span className={`px-3 py-1 text-sm rounded-full font-medium ${getStatusStyle(order.status)}`}>
-                  {order.status}
-                </span>
-              </div>
+         orders.map((order) => (
+  <div key={order._id} className="bg-gray-800 rounded-md p-5 mb-6 shadow-md">
+    <div className="flex justify-between items-center mb-3">
+      <div>
+        <h2 className="text-xl font-semibold">Table: {order.tableNumber}</h2>
+        <p className="text-sm text-gray-400">{new Date(order.createdAt).toLocaleString()}</p>
+      </div>
+      <span className={`px-3 py-1 text-sm rounded-full font-medium ${getStatusStyle(order.status)}`}>
+        {order.status}
+      </span>
+    </div>
 
-              <div className="text-sm mb-3">
-                <p className="font-semibold mb-1">Items:</p>
-                <ul className="space-y-1">
-                  {order.items.map((item, idx) => (
-                    <li key={idx} className="flex justify-between">
-                      <span>{item.name}</span>
-                      <span className="text-orange-300 font-medium">Qty: {item.quantity}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))
+    <div className="text-sm mb-3">
+      <p className="font-semibold mb-1">Items:</p>
+      <ul className="space-y-1">
+        {order.items.map((item, idx) => (
+          <li key={idx} className="flex justify-between">
+            <span>{item.name}</span>
+            <span className="text-orange-300 font-medium">Qty: {item.quantity}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    {/* ✅ Total Price */}
+    <div className="text-right mt-4">
+      <span className="text-lg font-semibold text-green-400">
+        Total: Rs. {order.totalPrice.toFixed(2)}
+      </span>
+    </div>
+  </div>
+))
+
         )}
       </div>
       <Footer />

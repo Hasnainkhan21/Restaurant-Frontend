@@ -68,7 +68,7 @@ const PlaceOrder = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Navbar />
-      <div className="max-w-5xl mx-auto py-12 px-4">
+      <div className="max-w-5xl mx-auto py-12 mt-14 px-4">
         <h2 className="text-3xl font-bold text-center text-orange-600 mb-8">🛒 Place Your Order</h2>
 
         <div className="mb-6">

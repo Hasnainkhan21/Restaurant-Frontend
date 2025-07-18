@@ -6,6 +6,7 @@ import Footer from '../Components/Footer';
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,10 +16,21 @@ const Menu = () => {
         setMenuItems(items);
       } catch (err) {
         console.error("Failed to fetch menu items:", err);
+      } finally{
+        setLoading(false)
       }
     };
     fetchData();
   }, []);
+
+    if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-950 text-white">
+        <Navbar />
+        <p className="text-lg">Loading Our Menue...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-black min-h-screen">
