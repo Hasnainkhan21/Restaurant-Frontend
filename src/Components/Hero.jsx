@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import heroImg from '../assets/h.jpg'; // Ensure this path and filename are correct
 
 const Hero = () => {
@@ -19,7 +20,7 @@ const Hero = () => {
         </p>
         <div className="space-x-4">
           <button className="bg-black hover:bg-gray-900 text-white px-6 py-2 transition">
-            Order Now
+          <Link to='/place-order'>Place Order</Link>
           </button>
           <button className="border border-white text-white px-6 py-2 hover:bg-black hover:border-none hover:text-white transition">
             View Menu

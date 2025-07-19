@@ -9,6 +9,8 @@ const Menu = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  const img = 'http://localhost:3002/uploads/';
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,7 +50,7 @@ const Menu = () => {
   >
     {/* Background Image */}
     <img
-      src={`http://localhost:3002/uploads/${item.image}`}
+      src={`${img}${item.image}`}
       alt={item.name}
       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
     />

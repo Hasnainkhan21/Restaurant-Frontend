@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+
+import {
+  fetchLowStockItems,
+  fetchInventoryItems,
+  addInventoryItem,
+  updateInventoryItem,
+  deleteInventoryItem
+} from '../Services/inventory';
 
 const Inventory = () => {
   const [items, setItems] = useState([]);
+  const [lowStockItems, setLowStockItems] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     quantity: '',
@@ -12,18 +22,21 @@ const Inventory = () => {
   });
   const [message, setMessage] = useState('');
   const [editItemId, setEditItemId] = useState(null);
-  const API = 'http://localhost:3002/api/v0';
 
   const token = localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem('user'));
   const isAllowed = user?.role === 'admin' || user?.role === 'inventory';
 
+  useEffect(() => {
+    if (isAllowed) {
+      fetchInventory();
+      fetchLowStock();
+    }
+  }, [isAllowed]);
+
   const fetchInventory = async () => {
     try {
-      const res = await axios.get(`${API}/inventory/getAllInventoryItems`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = Array.isArray(res.data) ? res.data : res.data.items || [];
+      const data = await fetchInventoryItems();
       setItems(data);
     } catch (err) {
       console.error('Error fetching inventory:', err);
@@ -31,11 +44,14 @@ const Inventory = () => {
     }
   };
 
-  useEffect(() => {
-    if (isAllowed) {
-      fetchInventory();
+  const fetchLowStock = async () => {
+    try {
+      const data = await fetchLowStockItems();
+      setLowStockItems(data);
+    } catch (err) {
+      console.error('Error fetching low stock items:', err);
     }
-  }, [isAllowed]);
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,22 +68,17 @@ const Inventory = () => {
 
     try {
       if (editItemId) {
-        // 🔁 Update logic
-        await axios.put(`${API}/inventory/updateInventoryItem/${editItemId}`, formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await updateInventoryItem(editItemId, formData);
         setMessage('Item updated successfully');
       } else {
-        // ➕ Add logic
-        await axios.post(`${API}/inventory/addInventoryItem`, formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await addInventoryItem(formData);
         setMessage('Item added successfully');
       }
 
       setFormData({ name: '', quantity: '', unit: '', threshold: '' });
       setEditItemId(null);
       fetchInventory();
+      fetchLowStock(); // Refresh low stock list
     } catch (err) {
       console.error('Error:', err);
       setMessage(err.response?.data?.message || 'Operation failed');
@@ -76,12 +87,12 @@ const Inventory = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${API}/inventory/deleteInventoryItem/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await deleteInventoryItem(id);
+      setMessage('Item deleted successfully');
       fetchInventory();
+      fetchLowStock(); // Refresh low stock list
     } catch (err) {
-      console.error('Error deleting item:', err);
+      setMessage(err.response?.data?.message || 'Operation failed');
     }
   };
 
@@ -107,6 +118,16 @@ const Inventory = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
       {message && <Alert severity="info" className="mb-4">{message}</Alert>}
+
+      {lowStockItems.length > 0 && (
+        <Stack spacing={2} className="mb-4">
+          <Alert severity="warning">
+            ⚠️ Low Stock Alert:{" "}
+            {lowStockItems.map(item => `${item.name} (${item.quantity} ${item.unit})`).join(', ')}
+          </Alert>
+        </Stack>
+      )}
+
       <h2 className="text-2xl font-bold mb-4">Inventory Management</h2>
 
       {/* Inventory Form */}
@@ -170,7 +191,7 @@ const Inventory = () => {
             <div>
               <h3 className="font-semibold">{item.name}</h3>
               <p className="text-sm text-gray-700">
-                Quantity: {item.quantity.toFixed(1  )} {item.unit} | Threshold: {item.threshold}
+                Quantity: {typeof item.quantity === 'number' ? item.quantity.toFixed(1) : item.quantity} {item.unit} | Threshold: {item.threshold}
               </p>
             </div>
             {user.role === 'admin' && (

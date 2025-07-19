@@ -1,6 +1,6 @@
 // AdminDashboard.jsx
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { fetchDashboardSummary } from '../Services/analyticsService';
 import InventoryDashboard from '../Admin-components/InventoryDashboard';
 
 const Dashboard = () => {
@@ -8,18 +8,16 @@ const Dashboard = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const fetchSummary = async () => {
+    const getSummary = async () => {
       try {
-        const res = await axios.get("http://localhost:3002/api/v0/analytics/summary", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setSummary(res.data);
+        const data = await fetchDashboardSummary(token);
+        setSummary(data);
       } catch (err) {
-        console.error("Error fetching summary", err);
+        console.error("Error loading dashboard summary");
       }
     };
 
-    fetchSummary();
+    getSummary();
   }, [token]);
 
   return (
@@ -34,7 +32,6 @@ const Dashboard = () => {
         <Card title="Total Customers" value={summary?.totalUsers} color="bg-purple-600" />
       </div>
 
-      {/* ✅ Inventory Dashboard Component */}
       <InventoryDashboard />
     </div>
   );
