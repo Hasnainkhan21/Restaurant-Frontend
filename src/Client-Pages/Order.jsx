@@ -3,6 +3,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import { getUserOrders } from '../Services/orderService';
 
 const Order = () => {
   const [orders, setOrders] = useState([]);
@@ -11,18 +12,16 @@ const Order = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      try {
-        const res = await axios.get("http://localhost:3002/api/v0/orders/userOrders", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const sorted = res.data.orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        setOrders(sorted);
-      } catch (err) {
-        console.error("Failed to fetch orders", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  try {
+    const data = await getUserOrders(token);
+    const sorted = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    setOrders(sorted);
+  } catch (err) {
+    console.error("Failed to fetch orders", err);
+  } finally {
+    setLoading(false);
+  }
+};
 
     fetchOrders();
 

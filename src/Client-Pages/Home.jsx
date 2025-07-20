@@ -5,6 +5,7 @@ import We from '../Components/We'
 import MealCards from '../Components/MealCards'
 import Found from '../Components/Found'
 import Footer from '../Components/Footer'
+import RestaurantCarousel from '../Components/restaurantCarousel'
 
 const Home = () => {
   return (
@@ -12,8 +13,9 @@ const Home = () => {
     <Navbar />
     <Hero />
     <We />
-    <MealCards />
+    <RestaurantCarousel />
     <Found />
+    <MealCards />
     <Footer />
     </>
   )

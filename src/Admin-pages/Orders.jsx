@@ -62,8 +62,9 @@ const Orders = () => {
             <div key={order._id} className="bg-white shadow-md rounded p-4 mb-5">
               <div className="flex justify-between items-center mb-2">
                 <h3 className="font-semibold">Table: {order.tableNumber}</h3>
+                <h2>Name : <span className='text-blue-400 font-semibold font-[syne]'>{order.customerName}</span> </h2>
                 <select
-                  value={order.status}
+                  value={order.status} 
                   onChange={(e) => handleStatusChange(order._id, e.target.value)}
                   className="border px-2 py-1 rounded"
                 >

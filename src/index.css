@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&display=swap');
+
 @import "tailwindcss";
 
 .text-outline {
-  -webkit-text-stroke: 1px white;
+  -webkit-text-stroke: .2px white;
 }
 .slide-in-left {
   animation: slideInLeft 3s ease-out;
@@ -16,4 +18,7 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+.urdu-text {
+  font-family: 'Noto Sans Arabic', serif;
 }

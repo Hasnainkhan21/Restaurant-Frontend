@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import heroImg from '../assets/h.jpg'; // Ensure this path and filename are correct
 
 const Hero = () => {
@@ -12,7 +13,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-outline">
-  Welcome to Tasty Bites
+  Welcome to <span className='text-amber-500 font-[syne]'>Pakhlanz e Khyber</span>
 </h1>
 
         <p className="text-lg md:text-xl text-white mb-6 max-w-xl mx-auto">

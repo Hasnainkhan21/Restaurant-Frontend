@@ -31,3 +31,11 @@ export const placeOrder = async (orderData, token) => {
   });
   return res.data;
 };
+
+
+export const getUserOrders = async () => {
+  const res = await axios.get(`${API_URL}/userOrders`, {
+    headers: { Authorization: `Bearer ${getToken()}`  },
+  });
+  return res.data.orders;
+};

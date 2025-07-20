@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // ✅ Centralized API base
 const BASE_URL = 'http://localhost:3002/api/v0';
+
 const getAuthHeaders = (token) => ({
   headers: {
     Authorization: `Bearer ${token}`,

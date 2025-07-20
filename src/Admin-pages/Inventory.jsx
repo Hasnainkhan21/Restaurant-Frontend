@@ -123,7 +123,7 @@ const Inventory = () => {
         <Stack spacing={2} className="mb-4">
           <Alert severity="warning">
             ⚠️ Low Stock Alert:{" "}
-            {lowStockItems.map(item => `${item.name} (${item.quantity} ${item.unit})`).join(', ')}
+            {lowStockItems.map(item => `${item.name} (${item.quantity.toFixed(1)} ${item.unit})`).join(', ')}
           </Alert>
         </Stack>
       )}
@@ -191,25 +191,20 @@ const Inventory = () => {
             <div>
               <h3 className="font-semibold">{item.name}</h3>
               <p className="text-sm text-gray-700">
-                Quantity: {typeof item.quantity === 'number' ? item.quantity.toFixed(1) : item.quantity} {item.unit} | Threshold: {item.threshold}
+                Quantity: {typeof item.quantity === 'number' ? item.quantity.toFixed(1) : item.quantity} {item.unit} | Threshold: {item.threshold.toFixed(1)}
               </p>
             </div>
-            {user.role === 'admin' && (
-              <div className="space-x-2">
-                <button
-                  onClick={() => handleEditClick(item)}
-                  className="text-blue-500 hover:underline"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(item._id)}
-                  className="text-red-500 hover:underline"
-                >
-                  Delete
-                </button>
-              </div>
-            )}
+            {(user.role === 'admin' || user.role === 'inventory') && (
+                <div className="space-x-2">
+                  <button onClick={() => handleEditClick(item)} className="text-blue-500 hover:underline">
+                    Edit
+                  </button>
+                  <button onClick={() => handleDelete(item._id)} className="text-red-500 hover:underline">
+                    Delete
+                  </button>
+                </div>
+)}
+
           </div>
         ))}
       </div>

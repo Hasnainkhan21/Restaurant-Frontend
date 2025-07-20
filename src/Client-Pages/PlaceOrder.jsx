@@ -113,7 +113,7 @@ const PlaceOrder = () => {
                   <input
                     type="number"
                     min="0"
-                    step="0.1"
+                    step="1"
                     placeholder="Qty"
                     className="w-20 px-2 py-1 border rounded"
                     onChange={(e) => handleQuantityChange(item._id, e.target.value)}

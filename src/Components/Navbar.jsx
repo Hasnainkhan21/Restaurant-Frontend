@@ -29,7 +29,9 @@ const Navbar = () => {
     <nav className="bg-black text-white shadow-md px-4 py-3 fixed border-white border-b w-full z-50 top-0 left-0">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-orange-400">Tasty Bites</Link>
+        <Link to="/" className="text-2xl urdu-text urdu-text font-bold text-orange-400">
+        پخلنځی خېبر
+        </Link>
 
         {/* Hamburger (Mobile) */}
         <div className="lg:hidden text-orange-400 text-2xl cursor-pointer" onClick={toggleMenu}>
@@ -37,7 +39,7 @@ const Navbar = () => {
         </div>
 
         {/* Menu */}
-        <ul className={`lg:flex lg:items-center gap-6 absolute lg:static top-full left-0 w-full lg:w-auto bg-black lg:bg-transparent p-4 lg:p-0 transition-all duration-300 ease-in-out ${menuOpen ? 'block' : 'hidden'}`}>
+        <ul className={`font-[syne] lg:flex lg:items-center gap-6 absolute lg:static top-full left-0 w-full lg:w-auto bg-black lg:bg-transparent p-4 lg:p-0 transition-all duration-300 ease-in-out ${menuOpen ? 'block' : 'hidden'}`}>
   <li>
     <Link to="/" className="block py-2 px-4 hover:text-orange-400">Home</Link>
   </li>

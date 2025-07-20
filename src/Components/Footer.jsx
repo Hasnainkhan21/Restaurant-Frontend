@@ -7,8 +7,8 @@ const Footer = () => {
       <div className="container mx-auto px-4 max-w-4xl flex flex-col items-center justify-center space-y-4"> {/* Centered and tightly spaced */}
 
         {/* Brand Name */}
-        <h2 className="text-2xl font-extrabold text-[#fdf6e3] tracking-wide">
-          Tasty Bites
+        <h2 className="text-2xl urdu-text text-[#fdf6e3] tracking-wide">
+         پخلنځی خېبر
         </h2>
 
         {/* Social Icons */}

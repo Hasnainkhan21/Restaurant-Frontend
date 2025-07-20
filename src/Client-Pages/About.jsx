@@ -1,11 +1,9 @@
 import React from 'react';
-import Navbar from '../Components/Navbar'; // Assuming you have a Navbar component
-import Footer from '../Components/Footer'; // Assuming you have a Footer component
+import Navbar from '../Components/Navbar'; 
+import Footer from '../Components/Footer'; 
 
-// You might want to replace these with actual images from your restaurant
-// For a dark theme, consider images with good contrast or darker tones that blend well
-import teamPhoto from '../assets/we.png'; // Example: A photo of your team or chefs
-import restaurantInterior from '../assets/res.jpg'; // Example: A photo of your restaurant's ambiance
+import teamPhoto from '../assets/Team.jpg';
+import restaurantInterior from '../assets/ambiance.jpg';
 
 const About = () => {
   return (
@@ -28,10 +26,10 @@ const About = () => {
         </div>
       </section>
 
-      {/* About Us Content Sections */}
+ 
       <main className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
 
-        {/* Section 1: Our Philosophy / Who We Are */}
+       
         <section className="grid md:grid-cols-2 gap-12 items-center mb-20">
           <div className="md:order-2">
             <img
@@ -45,7 +43,7 @@ const About = () => {
               More Than Just Food
             </h2>
             <p className="mb-4 leading-relaxed text-lg">
-              At **Tasty Bites**, we believe that dining is an experience that engages all senses. Founded in 20XX in the heart of Dargai, our journey began with a simple yet profound vision: to create a space where authentic flavors meet unparalleled hospitality. Every ingredient is carefully selected, and every dish is prepared with a passion that transcends the plate.
+              At <span className='text-orange-200'>Pakhlanzai-e-Khyber</span> , we believe that dining is an experience that engages all senses. Founded in 2019 in the heart of Malakand, our journey began with a simple yet profound vision: to create a space where authentic flavors meet unparalleled hospitality. Every ingredient is carefully selected, and every dish is prepared with a passion that transcends the plate.
             </p>
             <p className="leading-relaxed text-lg">
               We are committed to delivering not just a meal, but a memory, blending traditional techniques with innovative approaches to bring you a culinary adventure you won't forget.
@@ -69,7 +67,7 @@ const About = () => {
               The Heart of Our Kitchen
             </h2>
             <p className="mb-4 leading-relaxed text-lg">
-              Behind every delicious creation at Tasty Bites is a team of dedicated chefs and passionate individuals. Led by **Chef [Chef's Name]**, whose culinary expertise spans two decades, our kitchen is a hub of creativity and precision. Our staff, from the front-of-house warmth to the meticulous hands in the kitchen, are all united by a shared love for food and a commitment to your satisfaction.
+              Behind every delicious creation at Tasty Bites is a team of dedicated chefs and passionate individuals. Led by Chef <span className='text-blue-400'>Khan Afghan</span>, whose culinary expertise spans two decades, our kitchen is a hub of creativity and precision. Our staff, from the front-of-house warmth to the meticulous hands in the kitchen, are all united by a shared love for food and a commitment to your satisfaction.
             </p>
             <p className="leading-relaxed text-lg">
               We're more than just colleagues; we're a family dedicated to making your dining experience truly exceptional.

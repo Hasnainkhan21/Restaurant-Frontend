@@ -48,6 +48,7 @@ const MenuManager = () => {
   };
 
   const handleChange = (e) => {
+    setMessage('')
     const { name, value, files } = e.target;
     if (name === 'image') {
       setFormData({ ...formData, image: files[0] });
@@ -101,7 +102,7 @@ const handleSubmit = async (e) => {
 
   setAdding(true); // Start loading
 
-  const token = localStorage.getItem("token"); // ✅ Get token
+  // const token = localStorage.getItem("token"); // ✅ Get token
 
   const data = new FormData();
   data.append('name', formData.name);
@@ -136,13 +137,16 @@ const handleSubmit = async (e) => {
 
 
   const handleDelete = async (id) => {
+    
     if (user?.role !== 'admin') {
       setMessage('Only admins can delete menu items');
       return;
     }
 
     try {
-      await deleteMenuItem(id);
+      
+      await deleteMenuItem(id, token);
+      setMessage("Menu item deleted successfully");
       fetchMenu();
     } catch (err) {
       console.error('Error deleting menu item:', err);
