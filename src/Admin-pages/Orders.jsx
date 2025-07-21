@@ -51,6 +51,9 @@ const Orders = () => {
     }
   };
 
+  const user = JSON.parse(localStorage.getItem('user'))
+  
+
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-5xl mx-auto py-10 px-4">
@@ -63,17 +66,20 @@ const Orders = () => {
               <div className="flex justify-between items-center mb-2">
                 <h3 className="font-semibold">Table: {order.tableNumber}</h3>
                 <h2>Name : <span className='text-blue-400 font-semibold font-[syne]'>{order.customerName}</span> </h2>
-                <select
-                  value={order.status} 
-                  onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                  className="border px-2 py-1 rounded"
-                >
-                  <option value="Pending">Pending</option>
-                  <option value="Preparing">Preparing</option>
-                  <option value="Ready">Ready</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Cancelled">Cancelled</option>
-                </select>
+              {(user?.role === 'admin' || user?.role === 'chef') && (
+  <select
+    value={order.status}
+    onChange={(e) => handleStatusChange(order._id, e.target.value)}
+    className="border px-2 py-1 rounded"
+  >
+    <option value="Pending">Pending</option>
+    <option value="Preparing">Preparing</option>
+    <option value="Ready">Ready</option>
+    <option value="Completed">Completed</option>
+    <option value="Cancelled">Cancelled</option>
+  </select>
+)}
+
               </div>
 
               {Array.isArray(order.items) && order.items.length > 0 ? (
@@ -91,13 +97,15 @@ const Orders = () => {
               <p className="text-xs text-gray-500 mt-2">
                 Time: {new Date(order.createdAt).toLocaleString()}
               </p>
+            {user?.role === 'admin' && (
+                  <button
+                    onClick={() => handleDelete(order._id)}
+                    className="mt-2 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
+                  >
+                    Delete Order
+                  </button>
+            )}
 
-              <button
-                onClick={() => handleDelete(order._id)}
-                className="mt-2 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
-              >
-                Delete Order
-              </button>
             </div>
           ))
         )}

@@ -1,5 +1,6 @@
 import React from 'react';
-import qualityImg from '../assets/we.png'; // Import the CSS file for animation
+import qualityImg from '../assets/we.png'; 
+import { Link } from 'react-router-dom';
 
 const We = () => {
   return (
@@ -28,7 +29,7 @@ const We = () => {
             Our high standards ensure each ingredient is fresh, high-quality, and supports your well-being.
           </p>
           <button className="bg-black border-black border-1 cursor-pointer hover:bg-white hover:text-black text-white px-6 py-2 transition duration-300">
-            About Us
+          <Link to='/about'> About Us</Link> 
           </button>
         </div>
       </div>

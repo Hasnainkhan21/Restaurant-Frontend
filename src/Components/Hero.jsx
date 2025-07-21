@@ -24,7 +24,7 @@ const Hero = () => {
           <Link to='/place-order'>Place Order</Link>
           </button>
           <button className="border border-white text-white px-6 py-2 hover:bg-black hover:border-none hover:text-white transition">
-            View Menu
+           <Link to='/menu'> View Menu</Link>
           </button>
         </div>
       </div>

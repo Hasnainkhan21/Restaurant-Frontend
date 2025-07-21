@@ -21,3 +21,12 @@ export const loginUser = async (credentials) => {
     throw error.response?.data || { message: 'Login failed' };
   }
 };
+
+export const allStaff = async() =>{
+  try{
+    const response = await axios.get(`${API}/all`)
+    return response.data;
+  }catch(error){
+    console.log(error)
+  }
+}
