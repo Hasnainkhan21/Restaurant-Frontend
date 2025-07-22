@@ -18,6 +18,7 @@ const Inventory = () => {
     name: '',
     quantity: '',
     unit: '',
+    unitPrice: '',
     threshold: ''
   });
   const [message, setMessage] = useState('');
@@ -69,38 +70,40 @@ const Inventory = () => {
     try {
       if (editItemId) {
         await updateInventoryItem(editItemId, formData);
-        setMessage('Item updated successfully');
+        setMessage( `${formData.name} updated successfully` );
       } else {
         await addInventoryItem(formData);
-        setMessage('Item added successfully');
+        setMessage(`${formData.name} added successfully to inventory`);
       }
 
-      setFormData({ name: '', quantity: '', unit: '', threshold: '' });
+      setFormData({ name: '', quantity: '', unit: '', unitPrice: '', threshold: '' });
       setEditItemId(null);
       fetchInventory();
-      fetchLowStock(); // Refresh low stock list
+      fetchLowStock(); 
     } catch (err) {
       console.error('Error:', err);
       setMessage(err.response?.data?.message || 'Operation failed');
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (item) => {
     try {
-      await deleteInventoryItem(id);
-      setMessage('Item deleted successfully');
+      await deleteInventoryItem(item._id);
+      setMessage(`${item.name} has been deleted from inventory`);
       fetchInventory();
-      fetchLowStock(); // Refresh low stock list
+      fetchLowStock(); 
     } catch (err) {
       setMessage(err.response?.data?.message || 'Operation failed');
     }
   };
 
   const handleEditClick = (item) => {
+
     setFormData({
       name: item.name,
       quantity: item.quantity,
       unit: item.unit,
+      unitPrice: item.unitPrice,
       threshold: item.threshold
     });
     setEditItemId(item._id);
@@ -162,6 +165,14 @@ const Inventory = () => {
           <option value="liters">liters</option>
           <option value="pieces">pieces</option>
         </select>
+        <input 
+          type="number"
+          name='unitPrice'
+          value={formData.unitPrice}
+          onChange={handleChange}
+          placeholder='unit Price'
+          required
+          className='border px-3 py-2 rounded' />
         <input
           type="number"
           name="threshold"
@@ -191,7 +202,7 @@ const Inventory = () => {
             <div>
               <h3 className="font-semibold">{item.name}</h3>
               <p className="text-sm text-gray-700">
-                Quantity: {typeof item.quantity === 'number' ? item.quantity.toFixed(1) : item.quantity} {item.unit} | Threshold: {item.threshold.toFixed(1)}
+                Quantity: {typeof item.quantity === 'number' ? item.quantity.toFixed(1) : item.quantity} {item.unit} | Threshold: {item.threshold.toFixed(1)} | Unit Price : {typeof item.unitPrice === 'number' ? item.unitPrice.toFixed(1) : item.unitPrice}  
               </p>
             </div>
             {(user.role === 'admin' || user.role === 'inventory') && (
@@ -199,7 +210,7 @@ const Inventory = () => {
                   <button onClick={() => handleEditClick(item)} className="text-blue-500 hover:underline">
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(item._id)} className="text-red-500 hover:underline">
+                  <button onClick={() => handleDelete(item)} className="text-red-500 hover:underline">
                     Delete
                   </button>
                 </div>

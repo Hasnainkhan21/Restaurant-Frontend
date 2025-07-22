@@ -113,10 +113,9 @@ const handleSubmit = async (e) => {
   data.append('ingredients', JSON.stringify(formData.ingredients));
 
   try {
-    await addMenuItem(data, token); // ✅ Pass token here
+    await addMenuItem(data, token);
     setMessage('Menu item added successfully');
 
-    // Reset form
     setFormData({
       name: '',
       price: '',
@@ -126,7 +125,7 @@ const handleSubmit = async (e) => {
       ingredients: [],
     });
 
-    fetchMenu(); // Refresh menu list
+    fetchMenu();
   } catch (err) {
     console.error('Error adding menu item:', err);
     setMessage(err.response?.data?.message || 'Failed to add menu item');
@@ -185,12 +184,14 @@ const handleSubmit = async (e) => {
   <option value="breakfast">BreakFast</option>
 
 </select>
+    {/* image uplading */}
         <input type="file" name="image" onChange={handleChange} className="border px-3 py-2 rounded" />
         <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" className="col-span-2 border px-3 py-2 rounded" />
 
         <div className="col-span-2">
           <label className="block font-semibold mb-2">Select Ingredients and Quantity:</label>
           <div className="grid grid-cols-2 gap-2">
+            
             {inventoryItems.map(item => (
               <div key={item._id} className="flex items-center space-x-2">
                 <input type="checkbox" checked={isIngredientChecked(item._id)} onChange={(e) => handleIngredientCheck(item._id, e.target.checked)} />
