@@ -13,6 +13,7 @@ const Sidebar = () => {
         <Link to="/admin/inventory" className="hover:text-orange-300">Inventory</Link>
         <Link to="/admin/staff" className="hover:text-orange-300">Staff</Link>
         <Link to="/admin/staff-registration" className="hover:text-orange-300">Staff Registration</Link>
+        <Link to="/admin/profit" className='hover:text-orange-300'>Profit</Link>
       </nav>
     </aside>
   );

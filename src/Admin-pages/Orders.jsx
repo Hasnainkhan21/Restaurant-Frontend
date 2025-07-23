@@ -55,7 +55,7 @@ const Orders = () => {
   
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="  ">
       <div className="max-w-5xl mx-auto py-10 px-4">
         <h2 className="text-3xl font-bold text-orange-600 text-center mb-6"> Orders</h2>
         {loading ? (

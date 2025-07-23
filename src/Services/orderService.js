@@ -1,9 +1,9 @@
 // Services/orderService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3002/api/v0/orders';
+export const API_URL = 'http://localhost:3002/api/v0/orders';
 
-const getToken = () => localStorage.getItem('token');
+export const getToken = () => localStorage.getItem('token');
 
 export const fetchAllOrders = async () => {
   return axios.get(`${API_URL}/allOrders`, {

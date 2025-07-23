@@ -17,6 +17,7 @@ import StaffRegister from './Admin-pages/StaffRegister';
 
 import ProtectedRoute from './Utils/ProtectedRoute';
 import PlaceOrder from './Client-Pages/PlaceOrder';
+import Profit from './Admin-pages/Profit';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="inventory" element={<Inventory />} />
           <Route path="staff" element={<Staff />} />
           <Route path="staff-registration" element={<StaffRegister />} />
+          <Route path="profit" element={<Profit />} />
         </Route>
       </Routes>
     </Router>

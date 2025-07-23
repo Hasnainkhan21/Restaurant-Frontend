@@ -25,11 +25,12 @@ const Dashboard = () => {
       <h2 className="text-3xl font-[syne] mb-6">📊 Admin Dashboard</h2>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
         <Card title="Total Orders" value={summary?.totalOrders} color="bg-blue-600" />
         <Card title="Total Sales" value={`Rs. ${Number(summary?.totalSales || 0).toFixed(2)}`} color="bg-green-600" />
         <Card title="Menu Items" value={summary?.totalMenuItems} color="bg-yellow-600" />
         <Card title="Total Customers" value={summary?.totalUsers} color="bg-purple-600" />
+        <Card title="Total Profit" value={`Rs. ${Number(summary?.totalProfit || 0).toFixed(2)}`} color="bg-pink-600" />
       </div>
 
       <InventoryDashboard />
